@@ -5,12 +5,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy
-        run: exit 0
-
       - name: Extract branch name
         run: echo ::set-output name=value::${GITHUB_REF#refs/*/}
         id: branch
+
+      - name: Deploy
+        run: exit 0
 
       - name: Notify
         if: always()
@@ -25,12 +25,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy
-        run: exit 1
-
       - name: Extract branch name
         run: echo ::set-output name=value::${GITHUB_REF#refs/*/}
         id: branch
+
+      - name: Deploy
+        run: exit 1
 
       - name: Notify
         if: always()
