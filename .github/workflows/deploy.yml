@@ -8,6 +8,9 @@ jobs:
       - name: Deploy
         run: exit 0
 
+      - run: echo ::set-output name=value::${GITHUB_REF#refs/*/}
+        id: branch
+
       - name: Notify
         if: always()
         uses: aslafy-z/freemobile-sms-action@master
@@ -15,7 +18,7 @@ jobs:
           freemobile_id: ${{ secrets.freemobile_id }}
           freemobile_token: ${{ secrets.freemobile_token }}
           message: |
-            ${{ github.repository }}@${{ github.ref }} deployment resulted in ${{ job.status }}.
+            ${{ github.repository }}@${{ steps.branch.outputs.value }} deployment resulted in ${{ job.status }}.
 
   deploy-failure:
     runs-on: ubuntu-latest
@@ -24,6 +27,9 @@ jobs:
       - name: Deploy
         run: exit 1
 
+      - run: echo ::set-output name=value::${GITHUB_REF#refs/*/}
+        id: branch
+
       - name: Notify
         if: always()
         uses: aslafy-z/freemobile-sms-action@master
@@ -31,4 +37,4 @@ jobs:
           freemobile_id: ${{ secrets.freemobile_id }}
           freemobile_token: ${{ secrets.freemobile_token }}
           message: |
-            ${{ github.repository }}@${{ github.ref }} deployment resulted in ${{ job.status }}.
+            ${{ github.repository }}@${{ steps.branch.outputs.value }} deployment resulted in ${{ job.status }}.
