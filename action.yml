@@ -1,0 +1,24 @@
+name: Send SMS notification with Free Mobile
+description: This action sends a SMS to Free Mobile customer using the included free API.
+author: aslafy-z
+
+inputs:
+  freemobile_id:
+    description: Free Mobile user
+    required: true
+  freemobile_token:
+    description: Free Mobile SMS token
+    required: true
+  message:
+    description: SMS message to be sent
+    required: True
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.freemobile_id }}
+    - ${{ inputs.freemobile_token }}
+    - ${{ inputs.message }}
+branding:
+  icon: message-circle
+  color: red
