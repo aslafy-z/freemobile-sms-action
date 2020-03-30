@@ -8,7 +8,8 @@ jobs:
       - name: Deploy
         run: exit 0
 
-      - run: echo ::set-output name=value::${GITHUB_REF#refs/*/}
+      - name: Extract branch name
+        run: echo ::set-output name=value::${GITHUB_REF#refs/*/}
         id: branch
 
       - name: Notify
@@ -27,7 +28,8 @@ jobs:
       - name: Deploy
         run: exit 1
 
-      - run: echo ::set-output name=value::${GITHUB_REF#refs/*/}
+      - name: Extract branch name
+        run: echo ::set-output name=value::${GITHUB_REF#refs/*/}
         id: branch
 
       - name: Notify
